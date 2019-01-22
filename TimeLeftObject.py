@@ -4,11 +4,13 @@
 # TimeLeft Object
 
 import datetime
+import time
 
 class TimeLeft:
     """This object implements the time between now and some datetime in the
         future, for example: a test date, flight, or birthday."""
-
+    #TODO: do fields not go here to be declared, before they're initialized
+    # in the constructor?
 
     # Constructor method:
     def __init__(self):
@@ -16,10 +18,10 @@ class TimeLeft:
         self.currentDateTime = datetime.datetime.today()
         self.timeLeft = self.futureDateTime - self.currentDateTime
         
-        
 
-    def printSomething(self):
-        print "something"
+    def updateTimeLeft(self):
+        self.currentDateTime = datetime.datetime.today()
+        self.timeLeft = self.futureDateTime - self.currentDateTime
 
     def printTimeDelta(self):
         print self.timeLeft
@@ -31,6 +33,10 @@ class TimeLeft:
 
 # "main" method
 instance = TimeLeft()
-instance.printSomething()
 instance.printTimeDelta()
+# for loop:
+for i in range(10):
+    instance.updateTimeLeft()
+    instance.printTimeDelta()
+    time.sleep(1)
     
