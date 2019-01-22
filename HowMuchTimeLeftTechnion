@@ -1,0 +1,58 @@
+#!/Library/Frameworks/Python.framework/Versions/2.7/bin/python
+# -*- coding: utf-8 -*-
+
+# TODO:
+# • seperate modules: the TimeLeft object, the textprinter, and someday a
+#     graphic printer
+# • Make the destination date accept cmd line arguments, or other arguments.  
+# • Make it run constantly, updating values every second using carriage return.  Hanging 
+#    out in corner of screen, always hiding over other things
+# • Make color orange
+# • Make font led style
+# • Make it run on mobile: Android, since they will accept all apps.  May need to port
+#    to Java for this.  
+
+
+import datetime
+from datetime import timedelta
+
+
+
+print "Welcome to the Technion Timer of doom / eternal joy. \n"
+# 2019: This is so ironic to read this. Doom was right, I had no idea how bad
+# it would be
+
+
+NowDateTime = datetime.datetime.today()
+
+# Create time and date of test:
+# TODO: In future, make this the default value, but possible to overide via cmd line args
+TestDateTime = datetime.datetime(2019, 3, 17, 9)
+
+# You can also use 'str(datetime object)' syntax instead of .__str__()
+print "Current Time: " + NowDateTime.__str__()
+
+print "Test datetime: " + TestDateTime.__str__() + "\n"
+
+# TimeLeft is an object of type timedelta
+TimeLeft = TestDateTime - NowDateTime
+#Get actual "overflow" seconds: the total number of seconds beyond more than one day
+if (TimeLeft.days == 0):
+    TotalOverflowSeconds = TimeLeft.seconds
+else:
+    TotalOverflowSeconds = TimeLeft.seconds + TimeLeft.days*86400
+
+# "{:,}".format([value]) somehow adds the commas as thousand seperators, and casts the int
+# as string      
+print "{:,}".format(TotalOverflowSeconds) + " seconds left!"
+
+#  minutes left:
+minutesLeft = TotalOverflowSeconds / 60
+print "{:,}".format(minutesLeft) + " minutes left!"
+
+# Hours left:
+hoursLeft = minutesLeft / 60
+print "{:,}".format(hoursLeft) + " hours left!"
+
+
+print TimeLeft
